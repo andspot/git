@@ -1,0 +1,34 @@
+/*  Designed by Andrey Aksenov
+  
+   Function get the best metrics from the Scanner for each combination Key1 & Key2
+   Input :Key1 (BCCH for GSM, UARFCN for WCDMA) , Key2 (BSIC for GSM, PSC for WCDMA),  Scanner Array for Key1, Scanner Array for Key2,
+   			Scanner Array for Metic1 (can be null), 	Scanner Array for Metic2 (can be null)  
+   Output ArrayList: Metric1 , Metric2 (for instance RSCP, Ec/Io)
+*/ 
+
+ArrayList TopFromScanner(string Key1, string Key2, ArrayList aKey1,  ArrayList aKey2, ArrayList aMetric1, ArrayList aMetric2 )
+{
+  	int i=0, indicator = 0;                  
+	string Key1_current = "", Key2_current = "";
+	string Metric1 = "", Metric2 = "";
+	ArrayList  Outlist = new ArrayList(); 
+ 
+	if(Key1 !="" &  Key2 !="" & aKey1.Count > 0 & aKey2.Count > 0 )
+	{   
+    	while ((i <= aKey1.Count - 1) & ( indicator == 0))
+    	{
+    		Key1_current = Convert.ToString(aKey1[i]);
+    		Key2_current = Convert.ToString(aKey2[i]);
+    		
+			if(Key1_current == Key1 & Key2_current == Key2)
+			{
+				if(aMetric1!= null){Outlist.Add(aMetric1[i]);};
+				if(aMetric2!= null){Outlist.Add(aMetric2[i]);};
+				indicator = 1; 
+			}
+        		i++;
+ 	 	}
+	}
+ 
+     return Outlist;
+}
